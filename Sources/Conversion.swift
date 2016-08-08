@@ -8,14 +8,14 @@
 import Foundation
 
 public class Conversion {
-    public static func stringFromData(data: NSData) -> String {
-        guard let string = NSString(data: data, encoding: NSUTF8StringEncoding) else {
+    public static func stringFromData(_ data: Data) -> String {
+        guard let string = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else {
             return ""
         }
         return string as String
     }
     
-    public static func intFromString(string: String?) -> Int? {
+    public static func intFromString(_ string: String?) -> Int? {
         guard let string = string else {
             return nil
         }
@@ -25,11 +25,11 @@ public class Conversion {
         return int
     }
     
-    public static func boolFromString(string: String?) -> Bool? {
+    public static func boolFromString(_ string: String?) -> Bool? {
         guard let string = string else {
             return nil
         }
-        switch string.lowercaseString {
+        switch string.lowercased() {
         case "t", "true", "1":
             return true
         default:

@@ -8,12 +8,13 @@
 
 import Foundation
 
+let endPtr = XMLDocument().nodePtr
+
 /// XMLNode wraps xmlNodePtr and represents an element node in XML, with optional text content.
 ///
 /// - Important: Should not be subclassed outside of this module.
 public class XMLNode: CustomStringConvertible {
     internal let nodePtr: xmlNodePtr
-
 
     /// Keep track of all descendant node objects so we don't ever double-free an xmlNodePtr.
     ///
@@ -34,7 +35,7 @@ public class XMLNode: CustomStringConvertible {
     internal var _descendantNodes: Set<XMLNode> = []
 
     internal init(nodePtr: xmlNodePtr) {
-        precondition(nodePtr.memory._private == nil, "Only one XMLNode per xmlNodePtr allowed")
+        precondition(nodePtr.pointee._private == nil, "Only one XMLNode per xmlNodePtr allowed")
         self.nodePtr = nodePtr
         saveToPrivate()
         addToAnscestor()
@@ -45,38 +46,38 @@ public class XMLNode: CustomStringConvertible {
     /// parent or sibling nodes).
     private func saveToPrivate() {
         let unmanaged = Unmanaged<XMLNode>.passUnretained(self)
-        self.nodePtr.memory._private = UnsafeMutablePointer<Void>(unmanaged.toOpaque())
+        self.nodePtr.pointee._private = UnsafeMutablePointer<Void>(unmanaged.toOpaque())
     }
 
     /// Adds this node object to the closest anscestor's object's `_descendantNodes` list, if
     /// one exists.
     private func addToAnscestor() {
-        var parent = self.nodePtr.memory.parent
+        var parent = self.nodePtr.pointee.parent
         var foundAncestorObject = false
         while parent != nil {
-            if parent.memory._private != nil {
+            if parent!.pointee._private != nil {
                 foundAncestorObject = true
                 break
             }
 
-            parent = parent.memory.parent
+            parent = parent!.pointee.parent
         }
 
         if foundAncestorObject {
-            let parentNode = XMLNode._objectNodeForNode(parent)
+            let parentNode = XMLNode._objectNodeForNode(parent!)
             parentNode._descendantNodes.insert(self)
         }
     }
 
-    internal class func _objectNodeForNode(node: xmlNodePtr) -> XMLNode {
-        switch node.memory.type {
+    internal class func _objectNodeForNode(_ node: xmlNodePtr) -> XMLNode {
+        switch node.pointee.type {
 
         case XML_DOCUMENT_NODE:
             return XMLDocument._objectNodeForNode(node)
 
         default:
-            if node.memory._private != nil {
-                let unmanaged = Unmanaged<XMLNode>.fromOpaque(COpaquePointer(node.memory._private))
+            if node.pointee._private != nil {
+                let unmanaged = Unmanaged<XMLNode>.fromOpaque(node.pointee._private)
                 return unmanaged.takeUnretainedValue()
             }
 
@@ -92,8 +93,10 @@ public class XMLNode: CustomStringConvertible {
     /// Name of the node. If this node has no name, returns an empty string.
     public var name: String {
         get {
-            let nodeName = nodePtr.memory.name
-            return String.fromXMLString(nodeName)
+            if let nodeName = nodePtr.pointee.name {
+                return String.fromXMLString(nodeName)
+            }
+            return ""
         }
         set {
             xmlNodeSetName(nodePtr, newValue)
@@ -120,11 +123,11 @@ public class XMLNode: CustomStringConvertible {
     }
 
     public var parent: XMLNode? {
-        guard nodePtr.memory.parent != nil else {
+        guard nodePtr.pointee.parent != nil else {
             return nil
         }
 
-        let parent = XMLNode._objectNodeForNode(nodePtr.memory.parent)
+        let parent = XMLNode._objectNodeForNode(nodePtr.pointee.parent)
         if !parent._descendantNodes.contains(self) {
             // this means we had to create the parent node object
             parent._descendantNodes.insert(self)
@@ -141,7 +144,7 @@ public class XMLNode: CustomStringConvertible {
 
         // Nodes that are documents have to be free'd using `xmlFreeDoc` or they will leak details
         // that are unique to documents.
-        if nodePtr.memory.type == XML_DOCUMENT_NODE {
+        if nodePtr.pointee.type == XML_DOCUMENT_NODE {
             xmlFreeDoc(xmlDocPtr(nodePtr))
         } else {
             xmlFreeNode(nodePtr)
@@ -171,19 +174,30 @@ extension XMLNode: Hashable {
 // MARK: CollectionType
 
 
-extension XMLNode: CollectionType {
-    public typealias Index = XMLNodeIndex
+extension XMLNode: Collection {
+    public typealias Index = xmlNodePtr
 
-    public subscript(index: XMLNodeIndex) -> XMLNode {
-        return XMLNode._objectNodeForNode(index.ptr)
+    public subscript(index: Index) -> XMLNode {
+        return XMLNode._objectNodeForNode(index)
     }
 
-    public var startIndex: XMLNodeIndex {
-        return XMLNodeIndex(ptr: xmlFirstElementChild(nodePtr), parentPtr: nodePtr)
+    public var startIndex: Index {
+        return xmlFirstElementChild(nodePtr)
     }
 
-    public var endIndex: XMLNodeIndex {
-        return XMLNodeIndex(ptr: nil, parentPtr: nodePtr)
+    public var lastIndex: Index {
+        return xmlLastElementChild(nodePtr)
+    }
+    
+    public var endIndex: Index {
+        return endPtr
+    }
+
+    public func index(after ptr: Index) -> Index {
+        guard let index = xmlNextElementSibling(ptr) else {
+            return endIndex
+        }
+        return index
     }
 
     public subscript(nodeName: String) -> [XMLNode] {
@@ -195,14 +209,14 @@ extension XMLNode: CollectionType {
     /// Add a child node to this node.
     ///
     /// - Precondition: Child must not already have a parent.
-    public func addChild(child: XMLNode) {
+    public func addChild(_ child: XMLNode) {
         precondition(child.parent == nil, "Cannot add a child that has a parent; detach first")
 
         xmlAddChild(nodePtr, child.nodePtr)
         _descendantNodes.insert(child)
     }
 
-    public func removeChild(child: XMLNode) {
+    public func removeChild(_ child: XMLNode) {
         xmlUnlinkNode(child.nodePtr)
         _descendantNodes.remove(child)
     }
@@ -212,58 +226,10 @@ extension XMLNode: CollectionType {
     }
 }
 
-/// Opaque index type for XML trees (made up of `XMLNode`s)
-public struct XMLNodeIndex: BidirectionalIndexType {
-    private let parentPtr: xmlNodePtr
-    private let ptr: xmlNodePtr
-    private init(ptr: xmlNodePtr, parentPtr: xmlNodePtr) {
-        self.ptr = ptr
-        self.parentPtr = parentPtr
-    }
-
-    /**
-     Successor method from `ForwardIndexType`. `self.successor().predecessor() == self`
-
-     - returns: An index pointing to the next element sibling
-     */
-    public func successor() -> XMLNodeIndex {
-        guard ptr != nil else {
-            // the successor to the endIndex is the startIndex. Why?
-            // because `BidirectionalIndexType` has a comment saying that self.successor.predecessor == self,
-            // that's why.
-            return XMLNodeIndex(ptr: xmlFirstElementChild(parentPtr), parentPtr: parentPtr)
-        }
-
-        return XMLNodeIndex(ptr: xmlNextElementSibling(ptr), parentPtr: parentPtr)
-    }
-
-    /**
-     Predecessor method from `BidirectionalIndexType`. `self.predecessor().successor() == self`
-
-     - returns: An index pointing to the previous element sibling
-     */
-    public func predecessor() -> XMLNodeIndex {
-        guard ptr != nil else {
-            // the predecessor of the endIndex is the last item in the collection
-            return XMLNodeIndex(ptr: xmlLastElementChild(parentPtr), parentPtr: parentPtr)
-        }
-
-        return XMLNodeIndex(ptr: xmlPreviousElementSibling(ptr), parentPtr: parentPtr)
-    }
-}
-
-public func ==(lhs: XMLNodeIndex, rhs: XMLNodeIndex) -> Bool {
-    return lhs.ptr == rhs.ptr && lhs.parentPtr == rhs.parentPtr
-}
-
-
 // MARK: Extensions
 
 internal extension String {
-    internal static func fromXMLString(xmlStr: UnsafePointer<xmlChar>) -> String {
-        guard let result = String.fromCString(UnsafePointer<CChar>(xmlStr)) else {
-            return ""
-        }
-        return result
+    internal static func fromXMLString(_ xmlStr: UnsafePointer<xmlChar>) -> String {
+        return String(cString: UnsafePointer<CChar>(xmlStr))
     }
 }

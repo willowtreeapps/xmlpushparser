@@ -285,10 +285,9 @@
 			children = (
 				C644A75B1D59007900F26F7E /* XMLConversions.swift */,
 				C644A7651D59013F00F26F7E /* FileHelpers.swift */,
-				C644A75C1D59007900F26F7E /* XMLDocumentTests.swift */,
 				C644A75D1D59007900F26F7E /* XMLElementParserTests.swift */,
-				C644A75E1D59007900F26F7E /* XMLNodeTests.swift */,
 				C644A75F1D59007900F26F7E /* XMLPushParserTests.swift */,
+				D95D41311D5A117400B69CCD /* XMLBuilder */,
 				C644A7881D59074A00F26F7E /* Data */,
 				C644A7541D59003700F26F7E /* Info.plist */,
 			);
@@ -312,6 +311,15 @@
 				C644A7821D59074400F26F7E /* repeat-owner.xml */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		D95D41311D5A117400B69CCD /* XMLBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				C644A75C1D59007900F26F7E /* XMLDocumentTests.swift */,
+				C644A75E1D59007900F26F7E /* XMLNodeTests.swift */,
+			);
+			name = XMLBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -419,14 +427,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = WillowTree;
 				TargetAttributes = {
 					C644A6361D58F74A00F26F7E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 					C644A74F1D59003700F26F7E = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -521,8 +531,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -570,8 +582,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -613,6 +627,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -630,6 +645,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Willowtree.XMLPushParser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -640,6 +657,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Willowtree.XMLPushParserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -650,6 +668,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Willowtree.XMLPushParserTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

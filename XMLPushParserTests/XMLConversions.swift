@@ -10,8 +10,8 @@ import XCTest
 @testable import XMLPushParser
 
 class XMLConversionTests: XCTestCase {
-    func data(string: String) -> NSData {
-        return string.dataUsingEncoding(NSUTF8StringEncoding)!
+    func data(_ string: String) -> Data {
+        return string.data(using: String.Encoding.utf8)!
     }
     
     class Parsable: SAXParsable {

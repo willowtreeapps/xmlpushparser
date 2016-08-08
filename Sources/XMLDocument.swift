@@ -23,8 +23,8 @@ public final class XMLDocument: XMLNode {
         super.init(nodePtr: xmlNodePtr(xmlNewDoc("1.0")))
     }
 
-    public enum Error: ErrorType {
-        case InvalidTypeInDictionary
+    public enum XMLError: Error {
+        case invalidTypeInDictionary
     }
 
     /**
@@ -38,7 +38,7 @@ public final class XMLDocument: XMLNode {
 
      - returns: A new `XMLNode` that is not yet part of any tree
      */
-    public func newNodeNamed(name: String, content: String = "") -> XMLNode {
+    public func newNodeNamed(_ name: String, content: String = "") -> XMLNode {
         let node = XMLNode(name: name, content: content, document: docPtr)
 
         return node
@@ -48,8 +48,7 @@ public final class XMLDocument: XMLNode {
     /// You should give it a name.
     public var rootNode: XMLNode {
         get {
-            let root = xmlDocGetRootElement(docPtr)
-            if root == nil {
+            guard let root = xmlDocGetRootElement(docPtr) else {
                 let node = self.newNodeNamed("", content: "")
                 xmlDocSetRootElement(docPtr, node.nodePtr)
                 _descendantNodes.insert(node)
@@ -60,11 +59,10 @@ public final class XMLDocument: XMLNode {
         }
 
         set {
-            let oldRoot = xmlDocGetRootElement(docPtr)
-            if newValue.nodePtr != oldRoot && oldRoot != nil {
+            if let oldRoot = xmlDocGetRootElement(docPtr), newValue.nodePtr != oldRoot {
                 let oldRootObj = XMLNode._objectNodeForNode(oldRoot)
-                if let index = _descendantNodes.indexOf(oldRootObj) {
-                    _descendantNodes.removeAtIndex(index)
+                if let index = _descendantNodes.index(of: oldRootObj) {
+                    _descendantNodes.remove(at: index)
                 }
                 xmlUnlinkNode(oldRoot)
             }
@@ -74,24 +72,27 @@ public final class XMLDocument: XMLNode {
     }
 
     public override var description: String {
-        var output: UnsafeMutablePointer<xmlChar> = nil
+        var output: UnsafeMutablePointer<xmlChar>?
         var length: Int32 = 0
 
         xmlDocDumpMemoryEnc(docPtr, &output, &length, "UTF-8")
         defer { xmlFree(output) }
 
-        return String.fromXMLString(output)
+        guard let s = output else {
+            return ""
+        }
+        return String.fromXMLString(s)
     }
     
     internal override init(nodePtr: xmlNodePtr) {
         super.init(nodePtr: nodePtr)
     }
     
-    internal override class func _objectNodeForNode(node: xmlNodePtr) -> XMLDocument {
-        precondition(node.memory.type == XML_DOCUMENT_NODE)
+    internal override class func _objectNodeForNode(_ node: xmlNodePtr) -> XMLDocument {
+        precondition(node.pointee.type == XML_DOCUMENT_NODE)
         
-        if node.memory._private != nil {
-            let unmanaged = Unmanaged<XMLDocument>.fromOpaque(COpaquePointer(node.memory._private))
+        if node.pointee._private != nil {
+            let unmanaged = Unmanaged<XMLDocument>.fromOpaque(node.pointee._private)
             return unmanaged.takeUnretainedValue()
         }
         
@@ -99,7 +100,7 @@ public final class XMLDocument: XMLNode {
     }
 }
 
-extension XMLDocument: DictionaryLiteralConvertible {
+extension XMLDocument: ExpressibleByDictionaryLiteral {
     public convenience init(dictionary: [String : AnyObject]) throws {
         self.init()
 
@@ -107,15 +108,15 @@ extension XMLDocument: DictionaryLiteralConvertible {
         try self.addChild(parseElements(elements, node: self))
     }
 
-    private func parseElements(elements: [(String, AnyObject)], node: XMLNode) throws -> XMLNode {
-        for (key, value) in elements {
+    private func parseElements(_ elements: [(key: String, value: AnyObject)], node: XMLNode) throws -> XMLNode {
+        for (key, value) in elements.sorted(by: { $0.key < $1.key }) {
             if let string = value as? String {
                 node.addChild(self.newNodeNamed(key, content: string))
             } else if let dict = value as? [String : AnyObject] {
                 let newNode = self.newNodeNamed(key)
                 try node.addChild(parseElements(Array(dict), node: newNode))
             } else {
-                throw Error.InvalidTypeInDictionary
+                throw XMLError.invalidTypeInDictionary
             }
         }
 
@@ -126,7 +127,7 @@ extension XMLDocument: DictionaryLiteralConvertible {
         self.init()
 
         do {
-            try self.addChild(parseElements(elements, node: self))
+            try self.addChild(parseElements(elements.map{ return (key: $0.0, value: $0.1) }, node: self))
         } catch {
             fatalError("Dictionary must contain only Strings or other Dictionary<String, AnyObject>")
         }
@@ -138,10 +139,11 @@ public protocol XMLConvertible {
 }
 
 public extension XMLConvertible {
-    private func xmlNode(doc: XMLDocument) -> XMLNode {
+    private func xmlNode(_ doc: XMLDocument) -> XMLNode {
         let mirror = Mirror(reflecting: self)
-        
-        let node = doc.newNodeNamed("\(mirror.subjectType)".lowercaseString)
+
+        let name = String(mirror.subjectType).lowercased()
+        let node = doc.newNodeNamed(name)
         for child in mirror.children {
             let value: XMLNode?
             

@@ -18,11 +18,11 @@ class XMLPushParserTests: XCTestCase {
         
         var catalog: Catalog?
         
-        func startElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
-            return .HandleWithChild(Catalog())
+        func startElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
+            return .handleWithChild(Catalog())
         }
         
-        func endChildElement(prefix: String?, URI: String?, localName: String, child: SAXParsable) {
+        func endChildElement(_ prefix: String?, URI: String?, localName: String, child: SAXParsable) {
             catalog = child as? Catalog
         }
     }
@@ -35,17 +35,17 @@ class XMLPushParserTests: XCTestCase {
         
         var books = [Book]()
         
-        func startElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
+        func startElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
             guard Element(rawValue: localName) != nil else {
-                return .Ignore
+                return .ignore
             }
             
             let book = Book()
             book.id = attributes["id"]!.value
-            return .HandleWithChild(book)
+            return .handleWithChild(book)
         }
         
-        func endChildElement(prefix: String?, URI: String?, localName: String, child: SAXParsable) {
+        func endChildElement(_ prefix: String?, URI: String?, localName: String, child: SAXParsable) {
             guard let book = child as? Book else {
                 return
             }
@@ -75,28 +75,28 @@ class XMLPushParserTests: XCTestCase {
         var author: String?
         var title: String?
         
-        func startElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
+        func startElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
             guard let element = Element(rawValue: localName) else {
-                return .Ignore
+                return .ignore
             }
             
             switch element {
             case .author: fallthrough
             case .title:
-                return .HandleAsData
+                return .handleAsData
             }
         }
         
-        func endDataElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute], contents: NSData) {
+        func endDataElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute], contents: Data) {
             guard let element = Element(prefix: prefix, URI: URI, localName: localName) else {
                 return
             }
             
             switch element {
             case .author:
-                author = NSString(data: contents, encoding: NSUTF8StringEncoding) as String?
+                author = NSString(data: contents, encoding: String.Encoding.utf8.rawValue) as String?
             case .title:
-                title = NSString(data: contents, encoding: NSUTF8StringEncoding) as String?
+                title = NSString(data: contents, encoding: String.Encoding.utf8.rawValue) as String?
             }
         }
     }
@@ -105,7 +105,6 @@ class XMLPushParserTests: XCTestCase {
     func testCatalogParse() {
         let parser = XMLPushParser<Document>()
         do {
-            let document = try parser.parse(fileNamed("books", ofType: "xml")!)
             let expected = [
                 ["bk101", "Gambardella, Matthew", "XML Developer's Guide"],
                 ["bk102", "Ralls, Kim", "Midnight Rain"],
@@ -120,19 +119,21 @@ class XMLPushParserTests: XCTestCase {
                 ["bk111", "O'Brien, Tim", "MSXML3: A Comprehensive Guide"],
                 ["bk112", "Galos, Mike", "Visual Studio 7: A Comprehensive Guide"],
             ]
-            XCTAssertEqual(expected, document.catalog!.flatCatalog())
+            guard let catalog = try parser.parse(fileNamed("books", ofType: "xml")!).catalog else {
+                XCTFail("should have a catalog")
+                return
+            }
+            XCTAssertEqual(expected, catalog.flatCatalog())
         } catch {
             XCTFail("should not throw \(error)")
         }
-        
-
     }
     
     func testBrokenParse() {
         let parser = XMLPushParser<Catalog>()
         do {
-            try parser.parse(fileNamed("broken-books", ofType: "xml")!)
-        } catch PushSaxParserErrorCode.LibXML2Error(let message) {
+            try _ = parser.parse(fileNamed("broken-books", ofType: "xml")!)
+        } catch PushSaxParserErrorCode.libXML2Error(let message) {
             XCTAssert(message.characters.count != 0)
             return
         } catch {

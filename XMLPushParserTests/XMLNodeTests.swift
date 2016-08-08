@@ -37,17 +37,15 @@ class XMLNodeTests: XCTestCase {
         
         var i = 0
         for child in node {
-            if child.description != "<Node\(i)><grandchild>hello world</grandchild></Node\(i)>" {
-                XCTFail(child.description)
-                break
-            }
+            XCTAssertEqual("<Node\(i)><grandchild>hello world</grandchild></Node\(i)>", child.description)
             i += 1
         }
         
         let nodes = node.dropLast()
-        XCTAssert(nodes.count == 9)
-        XCTAssert(nodes.last?.description == "<Node8><grandchild>hello world</grandchild></Node8>")
-        XCTAssert(nodes.first == node.first)
+        XCTAssertEqual(9, nodes.count)
+        let lastIndex = nodes.index(nodes.startIndex, offsetBy: nodes.count-1)
+        XCTAssertEqual("<Node8><grandchild>hello world</grandchild></Node8>", nodes[lastIndex].description)
+        XCTAssertEqual(node.first, nodes.first)
     }
     
     func testContent() {
@@ -75,7 +73,7 @@ class XMLNodeTests: XCTestCase {
         
         let childNode = node["Hello"]
         
-        XCTAssert(childNode == [newNode])
+        XCTAssertEqual([newNode], childNode)
     }
     
     func testRemoveChild() {
@@ -87,40 +85,20 @@ class XMLNodeTests: XCTestCase {
         
         XCTAssert(node.count == 10)
         
-        let index = node.startIndex.successor().successor()
+        var index = node.startIndex
+        index = node.index(after: index)
+        index = node.index(after: index)
         let nodeToRemove = node[index]
         XCTAssert(nodeToRemove.content == "2", nodeToRemove.content)
         node.removeChild(nodeToRemove)
         
         XCTAssert(node.count == 9)
         
-        let newIndex = node.startIndex.successor().successor()
+        var newIndex = node.startIndex
+        newIndex = node.index(after: newIndex)
+        newIndex = node.index(after: newIndex)
         let newNode = node[newIndex]
         XCTAssert(newNode.content == "3", newNode.content)
-    }
-    
-    func testBidirectionalIndexType() {
-        let node = doc.newNodeNamed("root")
-        for i in 0..<10 {
-            node.addChild(doc.newNodeNamed("child", content: "\(i)"))
-        }
-        
-        let index = node.startIndex
-        XCTAssert(index.successor().predecessor() == index)
-        XCTAssert(index.predecessor().successor() == index)
-    }
-    
-    func testGarbage() {
-        let ptr = UnsafeMutablePointer<UInt8>.alloc(5)
-        defer { ptr.dealloc(5) }
-        
-        ptr[0] = 0xF4
-        ptr[1] = 0xFF
-        ptr[2] = 0xFF
-        ptr[3] = 0xFF
-        
-        let result = String.fromXMLString(ptr)
-        XCTAssert(result == "")
     }
     
     func testParent() {

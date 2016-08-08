@@ -8,16 +8,16 @@
 import Foundation
 
 public enum SAXStartElement {
-    case Ignore
-    case HandleAsData
-    case HandleWithChild(SAXParsable)
+    case ignore
+    case handleAsData
+    case handleWithChild(SAXParsable)
 }
 
 public protocol SAXParsable {
     init()
-    func startElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement
-    func endDataElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute], contents: NSData)
-    func endChildElement(prefix: String?, URI: String?, localName: String, child: SAXParsable)
+    func startElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement
+    func endDataElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute], contents: Data)
+    func endChildElement(_ prefix: String?, URI: String?, localName: String, child: SAXParsable)
 }
 
 public class XMLPushParser<T: SAXParsable>: LibXMLPushSAXParser {
@@ -46,12 +46,12 @@ public class XMLPushParser<T: SAXParsable>: LibXMLPushSAXParser {
         super.init()
     }
     
-    public func parse(data: NSData) throws -> T {
+    public func parse(_ data: Data) throws -> T {
         try super._parse(data)
         return root
     }
     
-    public func parseData(data: NSData) throws {
+    public func parseData(_ data: Data) throws {
         try super._parseData(data)
     }
     
@@ -60,7 +60,7 @@ public class XMLPushParser<T: SAXParsable>: LibXMLPushSAXParser {
         return root
     }
     
-    override public func startElementWithPrefix(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) {
+    override public func startElementWithPrefix(_ prefix: String?, uri URI: String?, localName: String, attributes: [String:LibXMLAttribute]) {
         level += 1
 
         if ignoringElements {
@@ -68,17 +68,17 @@ public class XMLPushParser<T: SAXParsable>: LibXMLPushSAXParser {
         }
         
         switch current.startElement(prefix, URI: URI, localName: localName, attributes: attributes) {
-        case .Ignore:
+        case .ignore:
             ignoreElementsUntilLevel = level
-        case .HandleAsData:
+        case .handleAsData:
             buffer = NSMutableData()
             dataAttributes = attributes
-        case .HandleWithChild(let child):
+        case .handleWithChild(let child):
             stack.append(SAXParsableStackItem(child, level: level))
         }
     }
     
-    override public func endElementWithPrefix(prefix: String?, URI: String?, localName: String) {
+    override public func endElementWithPrefix(_ prefix: String?, uri URI: String?, localName: String) {
         defer {
             if let ignoreLevel = ignoreElementsUntilLevel {
                 if ignoreLevel == level {
@@ -98,13 +98,13 @@ public class XMLPushParser<T: SAXParsable>: LibXMLPushSAXParser {
             return
         }
         
-        current.endDataElement(prefix, URI: URI, localName: localName, attributes: dataAttributes!, contents: buffer!)
+        current.endDataElement(prefix, URI: URI, localName: localName, attributes: dataAttributes!, contents: buffer! as Data)
         buffer = nil
         dataAttributes = nil
     }
     
-    override public func charactersFound(characters: UnsafePointer<Int8>, length: Int) {
-        buffer?.appendBytes(characters, length: length)
+    override public func charactersFound(_ characters: UnsafePointer<Int8>, length: Int) {
+        buffer?.append(characters, length: length)
     }
 }
 
@@ -119,23 +119,23 @@ private struct SAXParsableStackItem {
 }
 
 public extension SAXParsable {
-    func startElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
-        return .Ignore
+    func startElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
+        return .ignore
     }
-    func endDataElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute], contents: NSData) { }
-    func endChildElement(prefix: String?, URI: String?, localName: String, child: SAXParsable) { }
+    func endDataElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute], contents: Data) { }
+    func endChildElement(_ prefix: String?, URI: String?, localName: String, child: SAXParsable) { }
 }
 
 public extension SAXParsable {
-    public func stringFromXML(data: NSData) -> String {
+    public func stringFromXML(_ data: Data) -> String {
         return Conversion.stringFromData(data)
     }
     
-    public func intFromXMLString(string: String?) -> Int! {
+    public func intFromXMLString(_ string: String?) -> Int! {
         return Conversion.intFromString(string)
     }
     
-    public func boolFromXMLString(string: String?) -> Bool! {
+    public func boolFromXMLString(_ string: String?) -> Bool! {
         return Conversion.boolFromString(string)
     }
 }
@@ -154,19 +154,19 @@ public class XMLSAXElementParser<DataElement:XMLElement, ChildElement:ChildXMLEl
     public var data = [DataElement:[XMLDataElement]]()
     public var children = [ChildElement:[SAXParsable]]()
     
-    public func startElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
+    public func startElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
         if let _ = DataElement(prefix: prefix, URI: URI, localName: localName) {
-            return .HandleAsData
+            return .handleAsData
         }
         
         guard let childElement = ChildElement(prefix: prefix, URI: URI, localName: localName) else {
-            return .Ignore
+            return .ignore
         }
         
-        return .HandleWithChild(childElement.type().init())
+        return .handleWithChild(childElement.type().init())
     }
     
-    public func endChildElement(prefix: String?, URI: String?, localName: String, child: SAXParsable) {
+    public func endChildElement(_ prefix: String?, URI: String?, localName: String, child: SAXParsable) {
         guard let element = ChildElement(prefix: prefix, URI: URI, localName: localName) else {
             return
         }
@@ -177,7 +177,7 @@ public class XMLSAXElementParser<DataElement:XMLElement, ChildElement:ChildXMLEl
         children[element]!.append(child)
     }
     
-    public func endDataElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute], contents: NSData) {
+    public func endDataElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute], contents: Data) {
         guard let element = DataElement(prefix: prefix, URI: URI, localName: localName) else {
             return
         }
@@ -187,7 +187,7 @@ public class XMLSAXElementParser<DataElement:XMLElement, ChildElement:ChildXMLEl
         data[element]!.append(XMLDataElement(value: stringFromXML(contents), attributes: attributes))
     }
     
-    public func datum(key: DataElement) -> XMLDataElement? {
+    public func datum(_ key: DataElement) -> XMLDataElement? {
         return data[key]?.first
     }
 }

@@ -19,11 +19,11 @@ class XMLPushParserElementParserTests: XCTestCase {
         
         var catalog: Catalog?
         
-        func startElement(prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
-            return .HandleWithChild(Catalog.XML.Parsable())
+        func startElement(_ prefix: String?, URI: String?, localName: String, attributes: [String:LibXMLAttribute]) -> SAXStartElement {
+            return .handleWithChild(Catalog.XML.Parsable())
         }
         
-        func endChildElement(prefix: String?, URI: String?, localName: String, child: SAXParsable) {
+        func endChildElement(_ prefix: String?, URI: String?, localName: String, child: SAXParsable) {
             catalog = Catalog(parser: child as! Catalog.XML.Parsable)
         }
     }
@@ -105,7 +105,10 @@ class XMLPushParserElementParserTests: XCTestCase {
     func testCatalogParse() {
         let parser = XMLPushParser<Document>()
         do {
-            let catalog = try parser.parse(fileNamed("books", ofType: "xml")!).catalog!
+            guard let catalog = try parser.parse(fileNamed("books", ofType: "xml")!).catalog else {
+                XCTFail("should have a catalog")
+                return
+            }
             let expected = [
                 ["Gambardella, Matthew", "XML Developer's Guide"],
                 ["Ralls, Kim", "Midnight Rain"],
@@ -122,7 +125,7 @@ class XMLPushParserElementParserTests: XCTestCase {
             ]
             XCTAssertEqual(expected, catalog.flatCatalog())
         } catch {
-            XCTFail("should not throw")
+            XCTFail("should not throw, got: \(error)")
         }
         
         
@@ -131,8 +134,8 @@ class XMLPushParserElementParserTests: XCTestCase {
     func testBrokenParse() {
         let parser = XMLPushParser<Catalog.XML.Parsable>()
         do {
-            try parser.parse(fileNamed("broken-books", ofType: "xml")!)
-        } catch PushSaxParserErrorCode.LibXML2Error(let message) {
+            try _ = parser.parse(fileNamed("broken-books", ofType: "xml")!)
+        } catch PushSaxParserErrorCode.libXML2Error(let message) {
             XCTAssertEqual("Extra content at the end of the document\n", message)
             return
         } catch {
@@ -144,7 +147,10 @@ class XMLPushParserElementParserTests: XCTestCase {
     func testMultipleDataElements() {
         let parser = XMLPushParser<Document>()
         do {
-            let catalog = try parser.parse(fileNamed("repeat-owner", ofType: "xml")!).catalog!
+            guard let catalog = try parser.parse(fileNamed("repeat-owner", ofType: "xml")!).catalog else {
+                XCTFail("should have a catalog")
+                return
+            }
             XCTAssertEqual(["a", "b", "c"], catalog.owners)
         } catch {
             XCTFail("should not throw")

@@ -12,23 +12,23 @@ class TestBundleClass {
     
 }
 
-func newTmpFile() -> NSURL {
-    let tmpDir = NSURL(fileURLWithPath: NSTemporaryDirectory())
-    return tmpDir.URLByAppendingPathComponent(NSUUID().UUIDString)
+func newTmpFile() -> URL {
+    let tmpDir = URL(fileURLWithPath: NSTemporaryDirectory())
+    return tmpDir.appendingPathComponent(UUID().uuidString)
 }
 
-func fileNamed(name: String, ofType type: String) -> NSData? {
-    let bundle = NSBundle(forClass: TestBundleClass.self)
-    if let path = bundle.pathForResource(name, ofType: type) {
-        return NSData(contentsOfFile: path)
+func fileNamed(_ name: String, ofType type: String) -> Data? {
+    let bundle = Bundle(for: TestBundleClass.self)
+    if let path = bundle.path(forResource: name, ofType: type) {
+        return (try? Data(contentsOf: URL(fileURLWithPath: path)))
     }
     return nil
 }
 
-func urlForFileNamed(name: String, ofType type: String) -> NSURL? {
-    let bundle = NSBundle(forClass: TestBundleClass.self)
-    if let path = bundle.pathForResource(name, ofType: type) {
-        return NSURL(fileURLWithPath: path)
+func urlForFileNamed(_ name: String, ofType type: String) -> URL? {
+    let bundle = Bundle(for: TestBundleClass.self)
+    if let path = bundle.path(forResource: name, ofType: type) {
+        return URL(fileURLWithPath: path)
     }
     return nil
 }

@@ -11,30 +11,38 @@ import Foundation
 extension LibXMLRawAttribute: Equatable {
     
     var valueLength: Int {
+        guard let valueEnd = valueEnd, let valueStart = valueStart else { return 0 }
         return valueEnd - valueStart
     }
     
     var localNameString: String {
-        return String.fromCString(localName) ?? ""
+        guard let localName = localName else { return "" }
+        return String(cString: localName) ?? ""
     }
     
     var prefixString: String? {
-        return String.fromCString(prefix)
+        guard let prefix = prefix else { return nil }
+        return String(cString: prefix)
     }
     
     var URIString: String? {
-        return String.fromCString(URI)
+        guard let uri = uri else { return nil }
+        return String(cString: uri)
     }
     
     var key: String {
-       return (prefixString != nil ? prefixString! + ":" : "") + localNameString
+        if let prefix = prefixString {
+            return "\(prefix):\(localNameString)"
+        }
+        return localNameString
     }
     
     var attributeValue: String {
-        return (NSString(bytes: valueStart, length: valueLength, encoding: NSUTF8StringEncoding) as String?) ?? ""
+        guard let valueStart = valueStart else { return "" }
+        return (NSString(bytes: valueStart, length: valueLength, encoding: String.Encoding.utf8.rawValue) as String?) ?? ""
     }
     
-    static func getBufferPointerWithStart(start: UnsafePointer<Void>, length: Int) -> UnsafeBufferPointer<LibXMLRawAttribute> {
+    static func getBufferPointerWithStart(_ start: UnsafePointer<Void>?, length: Int) -> UnsafeBufferPointer<LibXMLRawAttribute> {
        return UnsafeBufferPointer<LibXMLRawAttribute>(start: UnsafePointer<LibXMLRawAttribute>(start), count: length)
     }
 }
@@ -42,7 +50,7 @@ extension LibXMLRawAttribute: Equatable {
 public func ==(lhs: LibXMLRawAttribute, rhs: LibXMLRawAttribute) -> Bool {
     return lhs.localName == rhs.localName &&
         lhs.prefix == rhs.prefix &&
-        lhs.URI == rhs.URI &&
+        lhs.uri == rhs.uri &&
         lhs.valueStart == rhs.valueStart &&
         lhs.valueEnd == rhs.valueEnd
 }
@@ -56,25 +64,25 @@ private extension LibXMLAttribute {
     }
 }
 
-private func XMLPushSAXParserStartElementSAX(ctx: UnsafeMutablePointer<Void>,
-    localname: UnsafePointer<xmlChar>,
-    prefix: UnsafePointer<xmlChar>,
-    URI: UnsafePointer<xmlChar>,
-    nb_namespaces: Int32,
-    namespaces: UnsafeMutablePointer<UnsafePointer<xmlChar>>,
-    nb_attributes: Int32,
-    nb_defaulted: Int32,
-    attributes: UnsafeMutablePointer<UnsafePointer<xmlChar>>)
+private func XMLPushSAXParserStartElementSAX(_ ctx: UnsafeMutablePointer<Void>?,
+                                             _ localname: UnsafePointer<xmlChar>?,
+                                             _ prefix: UnsafePointer<xmlChar>?,
+                                             _ uri: UnsafePointer<xmlChar>?,
+                                             _ nb_namespaces: Int32,
+                                             _ namespaces: UnsafeMutablePointer<UnsafePointer<xmlChar>?>?,
+                                             _ nb_attributes: Int32,
+                                             _ nb_defaulted: Int32,
+                                             _ attributes: UnsafeMutablePointer<UnsafePointer<xmlChar>?>?)
 {
-    let parser = UnsafeMutablePointer<LibXMLPushSAXParser>(ctx).memory
-    
+    let parser = getParser(ctx)
+
     guard let elementLocalName = getString(localname) else {
         parser.errorOccurred("No local name for element")
         return
     }
     
     let elementPrefix = getString(prefix)
-    let elementURI = getString(URI)
+    let elementURI = getString(uri)
     
     let attributesBuffer = LibXMLRawAttribute.getBufferPointerWithStart(attributes, length: Int(nb_attributes))
     var elementAttributes = Dictionary<String, LibXMLAttribute>()
@@ -83,21 +91,31 @@ private func XMLPushSAXParserStartElementSAX(ctx: UnsafeMutablePointer<Void>,
     }
    
     parser.startElementWithPrefix(elementPrefix,
-        URI: elementURI,
+        uri: elementURI,
         localName: elementLocalName,
         attributes: elementAttributes)
 }
 
-private func XMLPushSAXParserEndElementSAX(ctx: UnsafeMutablePointer<Void>, localname: UnsafePointer<xmlChar>, prefix: UnsafePointer<xmlChar>, URI: UnsafePointer<xmlChar>) {
-    let parser = UnsafeMutablePointer<LibXMLPushSAXParser>(ctx).memory
+private func XMLPushSAXParserEndElementSAX(_ ctx: UnsafeMutablePointer<Void>?,
+                                           _ localname: UnsafePointer<xmlChar>?,
+                                           _ prefix: UnsafePointer<xmlChar>?,
+                                           _ uri: UnsafePointer<xmlChar>?)
+{
+    let parser = getParser(ctx)
     parser.endElementWithPrefix(getString(prefix),
-        URI: getString(URI),
+        uri: getString(uri),
         localName: getString(localname) ?? "")
 }
 
-private func XMLPushSAXParserCharactersFoundSAX(ctx: UnsafeMutablePointer<Void>, ch: UnsafePointer<xmlChar>, len: Int32)
+private func XMLPushSAXParserCharactersFoundSAX(_ ctx: UnsafeMutablePointer<Void>?,
+                                                _ ch: UnsafePointer<xmlChar>?,
+                                                _ len: Int32)
 {
-    let parser = UnsafeMutablePointer<LibXMLPushSAXParser>(ctx).memory
+    let parser = getParser(ctx)
+    guard let ch = ch else {
+        parser.errorOccurred("reported nil characters found")
+        return
+    }
     parser.charactersFound(UnsafePointer<Int8>(ch), length: Int(len))
 }
 
@@ -110,9 +128,20 @@ internal var XMLPushSAXParserHandlerStruct = { () -> xmlSAXHandler in
     handler.endElementNs = XMLPushSAXParserEndElementSAX
     handler.error = XMLPushSAXParserErrorEncounteredSAX
     return handler
-    }()
+}()
 
-private func getString(pointer: UnsafePointer<xmlChar>) -> String? {
+private func getParser(_ ctx: UnsafeMutablePointer<Void>?) -> LibXMLPushSAXParser {
+    guard let ctx = ctx else {
+        preconditionFailure("ctx ptr must be set")
+    }
+
+    return UnsafeMutablePointer<LibXMLPushSAXParser>(ctx).pointee
+}
+
+private func getString(_ pointer: UnsafePointer<xmlChar>?) -> String? {
+    guard let pointer = pointer else {
+        return nil
+    }
     let charPointer = UnsafePointer<CChar>(pointer)
-    return String.fromCString(charPointer)
+    return String(cString: charPointer)
 }

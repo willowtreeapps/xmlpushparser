@@ -59,12 +59,11 @@ class XMLDocumentTests: XCTestCase {
     }
 
     func testDictionaryInit() {
-        let dict = ["request" : ["deviceId" : "835C167A-D301-4927-B87F-C09E74963940", "deviceToken": "Blahblahblahlk3;waierjljasd;kje", "deviceName": "iPhone Simulator", "deviceType": "iPhone"]]
+        let dict = ["request" : ["c" : "835C167A-D301-4927-B87F-C09E74963940", "a": "Blahblahblahlk3;waierjljasd;kje", "b": "iPhone Simulator", "d": "iPhone"]]
         do {
             let doc = try XMLDocument(dictionary: dict)
-
-            let expectedResult = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<request><deviceToken>Blahblahblahlk3;waierjljasd;kje</deviceToken><deviceName>iPhone Simulator</deviceName><deviceId>835C167A-D301-4927-B87F-C09E74963940</deviceId><deviceType>iPhone</deviceType></request>\n"
-            XCTAssert(doc.description == expectedResult, doc.description)
+            let expectedResult = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<request><a>Blahblahblahlk3;waierjljasd;kje</a><b>iPhone Simulator</b><c>835C167A-D301-4927-B87F-C09E74963940</c><d>iPhone</d></request>\n"
+            XCTAssertEqual(expectedResult, doc.description)
         } catch {
             XCTFail("\(error)")
         }
@@ -72,7 +71,7 @@ class XMLDocumentTests: XCTestCase {
         do {
             let _ = try XMLDocument(dictionary: ["BadDict" : 23])
         } catch {
-            guard case XMLDocument.Error.InvalidTypeInDictionary = error else {
+            guard case XMLDocument.XMLError.invalidTypeInDictionary = error else {
                 XCTFail("\(error)")
                 return
             }
@@ -81,20 +80,20 @@ class XMLDocumentTests: XCTestCase {
 
     func testDictionaryLiteralConvertible() {
 
-        func testFunc(doc: XMLDocument) {
-            let expectedResult = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<request><deviceToken>Blahblahblahlk3;waierjljasd;kje</deviceToken><deviceName>iPhone Simulator</deviceName><deviceId>835C167A-D301-4927-B87F-C09E74963940</deviceId><deviceType>iPhone</deviceType></request>\n"
-            XCTAssert(doc.description == expectedResult, doc.description)
+        func testFunc(_ doc: XMLDocument) {
+            let expectedResult = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<request><a>Blahblahblahlk3;waierjljasd;kje</a><b>iPhone Simulator</b><c>835C167A-D301-4927-B87F-C09E74963940</c><d>iPhone</d></request>\n"
+            XCTAssertEqual(expectedResult, doc.description)
         }
 
-        testFunc(["request" : ["deviceId" : "835C167A-D301-4927-B87F-C09E74963940", "deviceToken": "Blahblahblahlk3;waierjljasd;kje", "deviceName": "iPhone Simulator", "deviceType": "iPhone"]])
+        testFunc(["request" : ["c" : "835C167A-D301-4927-B87F-C09E74963940", "a": "Blahblahblahlk3;waierjljasd;kje", "b": "iPhone Simulator", "d": "iPhone"]])
     }
     
     func testObtuse() {
         let doc = xmlNewDoc("1.0")
-        let node = xmlNewDocNode(doc, nil, "root", nil)
+        let node = xmlNewDocNode(doc, nil, "root", nil)!
         
-        let foo = xmlNewDocNode(doc, nil, "foo", nil)
-        let bar = xmlNewDocNode(doc, nil, "bar", nil)
+        let foo = xmlNewDocNode(doc, nil, "foo", nil)!
+        let bar = xmlNewDocNode(doc, nil, "bar", nil)!
         
         xmlAddChild(node, foo)
         xmlAddChild(foo, bar)
