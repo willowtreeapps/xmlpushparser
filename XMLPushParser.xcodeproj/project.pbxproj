@@ -59,9 +59,7 @@
 		C644A7231D58FE7000F26F7E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C644A7221D58FE7000F26F7E /* libxml2.tbd */; };
 		C644A7551D59003700F26F7E /* XMLPushParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C644A6371D58F74A00F26F7E /* XMLPushParser.framework */; };
 		C644A7601D59007900F26F7E /* XMLConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A75B1D59007900F26F7E /* XMLConversions.swift */; };
-		C644A7611D59007900F26F7E /* XMLDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A75C1D59007900F26F7E /* XMLDocumentTests.swift */; };
 		C644A7621D59007900F26F7E /* XMLElementParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A75D1D59007900F26F7E /* XMLElementParserTests.swift */; };
-		C644A7631D59007900F26F7E /* XMLNodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A75E1D59007900F26F7E /* XMLNodeTests.swift */; };
 		C644A7641D59007900F26F7E /* XMLPushParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A75F1D59007900F26F7E /* XMLPushParserTests.swift */; };
 		C644A7661D59013F00F26F7E /* FileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A7651D59013F00F26F7E /* FileHelpers.swift */; };
 		C644A7671D59015D00F26F7E /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C644A7221D58FE7000F26F7E /* libxml2.tbd */; };
@@ -70,8 +68,6 @@
 		C644A76B1D59051400F26F7E /* LibXMLPushSAXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A6E21D58F7BE00F26F7E /* LibXMLPushSAXParser.swift */; };
 		C644A76E1D59051400F26F7E /* XMLPushParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A6E41D58F7BE00F26F7E /* XMLPushParser.swift */; };
 		C644A76F1D59051400F26F7E /* Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A71D1D58F8E500F26F7E /* Conversion.swift */; };
-		C644A77C1D5906B000F26F7E /* XMLDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A77A1D5906B000F26F7E /* XMLDocument.swift */; };
-		C644A77D1D5906B000F26F7E /* XMLNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A77B1D5906B000F26F7E /* XMLNode.swift */; };
 		C644A7841D59074400F26F7E /* books.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A77F1D59074400F26F7E /* books.xml */; };
 		C644A7851D59074400F26F7E /* broken-books.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A7801D59074400F26F7E /* broken-books.xml */; };
 		C644A7871D59074400F26F7E /* repeat-owner.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A7821D59074400F26F7E /* repeat-owner.xml */; };
@@ -148,13 +144,9 @@
 		C644A7501D59003700F26F7E /* XMLPushParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XMLPushParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C644A7541D59003700F26F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C644A75B1D59007900F26F7E /* XMLConversions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLConversions.swift; sourceTree = "<group>"; };
-		C644A75C1D59007900F26F7E /* XMLDocumentTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLDocumentTests.swift; sourceTree = "<group>"; };
 		C644A75D1D59007900F26F7E /* XMLElementParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLElementParserTests.swift; sourceTree = "<group>"; };
-		C644A75E1D59007900F26F7E /* XMLNodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLNodeTests.swift; sourceTree = "<group>"; };
 		C644A75F1D59007900F26F7E /* XMLPushParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLPushParserTests.swift; sourceTree = "<group>"; };
 		C644A7651D59013F00F26F7E /* FileHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHelpers.swift; sourceTree = "<group>"; };
-		C644A77A1D5906B000F26F7E /* XMLDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = XMLDocument.swift; path = ../Sources/XMLDocument.swift; sourceTree = "<group>"; };
-		C644A77B1D5906B000F26F7E /* XMLNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = XMLNode.swift; path = ../Sources/XMLNode.swift; sourceTree = "<group>"; };
 		C644A77F1D59074400F26F7E /* books.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = books.xml; path = Data/books.xml; sourceTree = "<group>"; };
 		C644A7801D59074400F26F7E /* broken-books.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "broken-books.xml"; path = "Data/broken-books.xml"; sourceTree = "<group>"; };
 		C644A7821D59074400F26F7E /* repeat-owner.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "repeat-owner.xml"; path = "Data/repeat-owner.xml"; sourceTree = "<group>"; };
@@ -210,7 +202,6 @@
 				C644A6E11D58F7BE00F26F7E /* LibXMLPushSAXParser.m */,
 				C644A6E21D58F7BE00F26F7E /* LibXMLPushSAXParser.swift */,
 				C644A6E41D58F7BE00F26F7E /* XMLPushParser.swift */,
-				C644A7791D59065A00F26F7E /* XMLBuilder */,
 				C644A71F1D58F8EB00F26F7E /* Utils */,
 			);
 			path = XMLPushParser;
@@ -287,20 +278,10 @@
 				C644A7651D59013F00F26F7E /* FileHelpers.swift */,
 				C644A75D1D59007900F26F7E /* XMLElementParserTests.swift */,
 				C644A75F1D59007900F26F7E /* XMLPushParserTests.swift */,
-				D95D41311D5A117400B69CCD /* XMLBuilder */,
 				C644A7881D59074A00F26F7E /* Data */,
 				C644A7541D59003700F26F7E /* Info.plist */,
 			);
 			path = XMLPushParserTests;
-			sourceTree = "<group>";
-		};
-		C644A7791D59065A00F26F7E /* XMLBuilder */ = {
-			isa = PBXGroup;
-			children = (
-				C644A77A1D5906B000F26F7E /* XMLDocument.swift */,
-				C644A77B1D5906B000F26F7E /* XMLNode.swift */,
-			);
-			name = XMLBuilder;
 			sourceTree = "<group>";
 		};
 		C644A7881D59074A00F26F7E /* Data */ = {
@@ -311,15 +292,6 @@
 				C644A7821D59074400F26F7E /* repeat-owner.xml */,
 			);
 			name = Data;
-			sourceTree = "<group>";
-		};
-		D95D41311D5A117400B69CCD /* XMLBuilder */ = {
-			isa = PBXGroup;
-			children = (
-				C644A75C1D59007900F26F7E /* XMLDocumentTests.swift */,
-				C644A75E1D59007900F26F7E /* XMLNodeTests.swift */,
-			);
-			name = XMLBuilder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -483,8 +455,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C644A77C1D5906B000F26F7E /* XMLDocument.swift in Sources */,
-				C644A77D1D5906B000F26F7E /* XMLNode.swift in Sources */,
 				C644A7681D59051400F26F7E /* LibXMLCallbackFunctions.swift in Sources */,
 				C644A76A1D59051400F26F7E /* LibXMLPushSAXParser.m in Sources */,
 				C644A76B1D59051400F26F7E /* LibXMLPushSAXParser.swift in Sources */,
@@ -499,9 +469,7 @@
 			files = (
 				C644A7641D59007900F26F7E /* XMLPushParserTests.swift in Sources */,
 				C644A7621D59007900F26F7E /* XMLElementParserTests.swift in Sources */,
-				C644A7631D59007900F26F7E /* XMLNodeTests.swift in Sources */,
 				C644A7661D59013F00F26F7E /* FileHelpers.swift in Sources */,
-				C644A7611D59007900F26F7E /* XMLDocumentTests.swift in Sources */,
 				C644A7601D59007900F26F7E /* XMLConversions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
