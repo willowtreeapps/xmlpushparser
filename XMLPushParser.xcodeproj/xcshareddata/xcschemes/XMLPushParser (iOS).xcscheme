@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C644A6361D58F74A00F26F7E"
                BuildableName = "XMLPushParser.framework"
-               BlueprintName = "XMLPushParser"
+               BlueprintName = "XMLPushParser (iOS)"
                ReferencedContainer = "container:XMLPushParser.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C644A74F1D59003700F26F7E"
-               BuildableName = "XMLPushParserTests.xctest"
-               BlueprintName = "XMLPushParserTests"
+               BuildableName = "XMLPushParserTests (iOS).xctest"
+               BlueprintName = "XMLPushParserTests (iOS)"
                ReferencedContainer = "container:XMLPushParser.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -44,7 +44,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C644A6361D58F74A00F26F7E"
             BuildableName = "XMLPushParser.framework"
-            BlueprintName = "XMLPushParser"
+            BlueprintName = "XMLPushParser (iOS)"
             ReferencedContainer = "container:XMLPushParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,7 +66,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C644A6361D58F74A00F26F7E"
             BuildableName = "XMLPushParser.framework"
-            BlueprintName = "XMLPushParser"
+            BlueprintName = "XMLPushParser (iOS)"
             ReferencedContainer = "container:XMLPushParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -84,7 +84,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C644A6361D58F74A00F26F7E"
             BuildableName = "XMLPushParser.framework"
-            BlueprintName = "XMLPushParser"
+            BlueprintName = "XMLPushParser (iOS)"
             ReferencedContainer = "container:XMLPushParser.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

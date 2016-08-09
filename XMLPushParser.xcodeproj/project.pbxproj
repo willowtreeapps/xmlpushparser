@@ -71,6 +71,70 @@
 		C644A7841D59074400F26F7E /* books.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A77F1D59074400F26F7E /* books.xml */; };
 		C644A7851D59074400F26F7E /* broken-books.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A7801D59074400F26F7E /* broken-books.xml */; };
 		C644A7871D59074400F26F7E /* repeat-owner.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A7821D59074400F26F7E /* repeat-owner.xml */; };
+		D915E0EF1D5A5C98003456CB /* XMLPushParser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D915E0E61D5A5C98003456CB /* XMLPushParser.framework */; };
+		D915E0FD1D5A5D88003456CB /* XMLConversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A75B1D59007900F26F7E /* XMLConversions.swift */; };
+		D915E0FE1D5A5D88003456CB /* FileHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A7651D59013F00F26F7E /* FileHelpers.swift */; };
+		D915E0FF1D5A5D88003456CB /* XMLElementParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A75D1D59007900F26F7E /* XMLElementParserTests.swift */; };
+		D915E1001D5A5D88003456CB /* XMLPushParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A75F1D59007900F26F7E /* XMLPushParserTests.swift */; };
+		D915E1011D5A5D8C003456CB /* LibXMLCallbackFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A6DF1D58F7BE00F26F7E /* LibXMLCallbackFunctions.swift */; };
+		D915E1021D5A5D8C003456CB /* LibXMLPushSAXParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6E01D58F7BE00F26F7E /* LibXMLPushSAXParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1031D5A5D8C003456CB /* LibXMLPushSAXParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C644A6E11D58F7BE00F26F7E /* LibXMLPushSAXParser.m */; };
+		D915E1041D5A5D8C003456CB /* LibXMLPushSAXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A6E21D58F7BE00F26F7E /* LibXMLPushSAXParser.swift */; };
+		D915E1051D5A5D8C003456CB /* XMLPushParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A6E41D58F7BE00F26F7E /* XMLPushParser.swift */; };
+		D915E1061D5A5D93003456CB /* c14n.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B01D58F7BE00F26F7E /* c14n.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1071D5A5D93003456CB /* catalog.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B11D58F7BE00F26F7E /* catalog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1081D5A5D93003456CB /* chvalid.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B21D58F7BE00F26F7E /* chvalid.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1091D5A5D93003456CB /* debugXML.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B31D58F7BE00F26F7E /* debugXML.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E10A1D5A5D93003456CB /* dict.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B41D58F7BE00F26F7E /* dict.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E10B1D5A5D93003456CB /* DOCBparser.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B51D58F7BE00F26F7E /* DOCBparser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E10C1D5A5D93003456CB /* encoding.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B61D58F7BE00F26F7E /* encoding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E10D1D5A5D93003456CB /* entities.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B71D58F7BE00F26F7E /* entities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E10E1D5A5D93003456CB /* globals.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B81D58F7BE00F26F7E /* globals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E10F1D5A5D93003456CB /* hash.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6B91D58F7BE00F26F7E /* hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1101D5A5D93003456CB /* HTMLparser.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6BA1D58F7BE00F26F7E /* HTMLparser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1111D5A5D93003456CB /* HTMLtree.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6BB1D58F7BE00F26F7E /* HTMLtree.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1121D5A5D93003456CB /* list.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6BC1D58F7BE00F26F7E /* list.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1131D5A5D93003456CB /* nanoftp.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6BD1D58F7BE00F26F7E /* nanoftp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1141D5A5D93003456CB /* nanohttp.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6BE1D58F7BE00F26F7E /* nanohttp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1151D5A5D93003456CB /* parser.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6BF1D58F7BE00F26F7E /* parser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1161D5A5D93003456CB /* parserInternals.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C01D58F7BE00F26F7E /* parserInternals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1171D5A5D93003456CB /* pattern.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C11D58F7BE00F26F7E /* pattern.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1181D5A5D93003456CB /* relaxng.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C21D58F7BE00F26F7E /* relaxng.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1191D5A5D93003456CB /* SAX.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C31D58F7BE00F26F7E /* SAX.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E11A1D5A5D93003456CB /* SAX2.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C41D58F7BE00F26F7E /* SAX2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E11B1D5A5D93003456CB /* schemasInternals.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C51D58F7BE00F26F7E /* schemasInternals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E11C1D5A5D93003456CB /* schematron.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C61D58F7BE00F26F7E /* schematron.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E11D1D5A5D93003456CB /* threads.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C71D58F7BE00F26F7E /* threads.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E11E1D5A5D93003456CB /* tree.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C81D58F7BE00F26F7E /* tree.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E11F1D5A5D93003456CB /* uri.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6C91D58F7BE00F26F7E /* uri.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1201D5A5D93003456CB /* valid.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6CA1D58F7BE00F26F7E /* valid.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1211D5A5D93003456CB /* xinclude.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6CB1D58F7BE00F26F7E /* xinclude.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1221D5A5D93003456CB /* xlink.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6CC1D58F7BE00F26F7E /* xlink.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1231D5A5D93003456CB /* xmlautomata.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6CD1D58F7BE00F26F7E /* xmlautomata.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1241D5A5D93003456CB /* xmlerror.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6CE1D58F7BE00F26F7E /* xmlerror.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1251D5A5D93003456CB /* xmlexports.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6CF1D58F7BE00F26F7E /* xmlexports.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1261D5A5D93003456CB /* xmlIO.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D01D58F7BE00F26F7E /* xmlIO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1271D5A5D93003456CB /* xmlmemory.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D11D58F7BE00F26F7E /* xmlmemory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1281D5A5D93003456CB /* xmlmodule.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D21D58F7BE00F26F7E /* xmlmodule.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1291D5A5D93003456CB /* xmlreader.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D31D58F7BE00F26F7E /* xmlreader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E12A1D5A5D93003456CB /* xmlregexp.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D41D58F7BE00F26F7E /* xmlregexp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E12B1D5A5D93003456CB /* xmlsave.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D51D58F7BE00F26F7E /* xmlsave.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E12C1D5A5D93003456CB /* xmlschemas.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D61D58F7BE00F26F7E /* xmlschemas.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E12D1D5A5D93003456CB /* xmlschemastypes.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D71D58F7BE00F26F7E /* xmlschemastypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E12E1D5A5D93003456CB /* xmlstring.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D81D58F7BE00F26F7E /* xmlstring.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E12F1D5A5D93003456CB /* xmlunicode.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6D91D58F7BE00F26F7E /* xmlunicode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1301D5A5D93003456CB /* xmlversion.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6DA1D58F7BE00F26F7E /* xmlversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1311D5A5D93003456CB /* xmlwriter.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6DB1D58F7BE00F26F7E /* xmlwriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1321D5A5D93003456CB /* xpath.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6DC1D58F7BE00F26F7E /* xpath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1331D5A5D93003456CB /* xpathInternals.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6DD1D58F7BE00F26F7E /* xpathInternals.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1341D5A5D93003456CB /* xpointer.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A6DE1D58F7BE00F26F7E /* xpointer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1351D5A5D9C003456CB /* XMLPushParser.h in Headers */ = {isa = PBXBuildFile; fileRef = C644A63A1D58F74A00F26F7E /* XMLPushParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D915E1361D5A5DCB003456CB /* Conversion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C644A71D1D58F8E500F26F7E /* Conversion.swift */; };
+		D915E1371D5A5DD0003456CB /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C644A7221D58FE7000F26F7E /* libxml2.tbd */; };
+		D915E1381D5A5DD0003456CB /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C644A7221D58FE7000F26F7E /* libxml2.tbd */; };
+		D915E1391D5A5DE4003456CB /* books.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A77F1D59074400F26F7E /* books.xml */; };
+		D915E13A1D5A5DE4003456CB /* broken-books.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A7801D59074400F26F7E /* broken-books.xml */; };
+		D915E13B1D5A5DE4003456CB /* repeat-owner.xml in Resources */ = {isa = PBXBuildFile; fileRef = C644A7821D59074400F26F7E /* repeat-owner.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +143,13 @@
 			containerPortal = C644A62E1D58F74A00F26F7E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C644A6361D58F74A00F26F7E;
+			remoteInfo = XMLPushParser;
+		};
+		D915E0F01D5A5C98003456CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C644A62E1D58F74A00F26F7E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D915E0E51D5A5C98003456CB;
 			remoteInfo = XMLPushParser;
 		};
 /* End PBXContainerItemProxy section */
@@ -141,7 +212,7 @@
 		C644A6E41D58F7BE00F26F7E /* XMLPushParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XMLPushParser.swift; path = Sources/XMLPushParser.swift; sourceTree = SOURCE_ROOT; };
 		C644A71D1D58F8E500F26F7E /* Conversion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conversion.swift; path = ../Sources/Conversion.swift; sourceTree = "<group>"; };
 		C644A7221D58FE7000F26F7E /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
-		C644A7501D59003700F26F7E /* XMLPushParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XMLPushParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C644A7501D59003700F26F7E /* XMLPushParserTests (iOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "XMLPushParserTests (iOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C644A7541D59003700F26F7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C644A75B1D59007900F26F7E /* XMLConversions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLConversions.swift; sourceTree = "<group>"; };
 		C644A75D1D59007900F26F7E /* XMLElementParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XMLElementParserTests.swift; sourceTree = "<group>"; };
@@ -150,6 +221,8 @@
 		C644A77F1D59074400F26F7E /* books.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = books.xml; path = Data/books.xml; sourceTree = "<group>"; };
 		C644A7801D59074400F26F7E /* broken-books.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "broken-books.xml"; path = "Data/broken-books.xml"; sourceTree = "<group>"; };
 		C644A7821D59074400F26F7E /* repeat-owner.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = "repeat-owner.xml"; path = "Data/repeat-owner.xml"; sourceTree = "<group>"; };
+		D915E0E61D5A5C98003456CB /* XMLPushParser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = XMLPushParser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D915E0EE1D5A5C98003456CB /* XMLPushParserTests (tvOS).xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "XMLPushParserTests (tvOS).xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +243,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D915E0E21D5A5C98003456CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D915E1371D5A5DD0003456CB /* libxml2.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D915E0EB1D5A5C98003456CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D915E0EF1D5A5C98003456CB /* XMLPushParser.framework in Frameworks */,
+				D915E1381D5A5DD0003456CB /* libxml2.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -186,7 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				C644A6371D58F74A00F26F7E /* XMLPushParser.framework */,
-				C644A7501D59003700F26F7E /* XMLPushParserTests.xctest */,
+				C644A7501D59003700F26F7E /* XMLPushParserTests (iOS).xctest */,
+				D915E0E61D5A5C98003456CB /* XMLPushParser.framework */,
+				D915E0EE1D5A5C98003456CB /* XMLPushParserTests (tvOS).xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -353,12 +445,68 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D915E0E31D5A5C98003456CB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D915E11E1D5A5D93003456CB /* tree.h in Headers */,
+				D915E1181D5A5D93003456CB /* relaxng.h in Headers */,
+				D915E1131D5A5D93003456CB /* nanoftp.h in Headers */,
+				D915E1121D5A5D93003456CB /* list.h in Headers */,
+				D915E1321D5A5D93003456CB /* xpath.h in Headers */,
+				D915E1211D5A5D93003456CB /* xinclude.h in Headers */,
+				D915E1351D5A5D9C003456CB /* XMLPushParser.h in Headers */,
+				D915E1191D5A5D93003456CB /* SAX.h in Headers */,
+				D915E1061D5A5D93003456CB /* c14n.h in Headers */,
+				D915E12D1D5A5D93003456CB /* xmlschemastypes.h in Headers */,
+				D915E12A1D5A5D93003456CB /* xmlregexp.h in Headers */,
+				D915E11F1D5A5D93003456CB /* uri.h in Headers */,
+				D915E1311D5A5D93003456CB /* xmlwriter.h in Headers */,
+				D915E10E1D5A5D93003456CB /* globals.h in Headers */,
+				D915E1271D5A5D93003456CB /* xmlmemory.h in Headers */,
+				D915E1251D5A5D93003456CB /* xmlexports.h in Headers */,
+				D915E11A1D5A5D93003456CB /* SAX2.h in Headers */,
+				D915E10D1D5A5D93003456CB /* entities.h in Headers */,
+				D915E1261D5A5D93003456CB /* xmlIO.h in Headers */,
+				D915E1291D5A5D93003456CB /* xmlreader.h in Headers */,
+				D915E11D1D5A5D93003456CB /* threads.h in Headers */,
+				D915E10F1D5A5D93003456CB /* hash.h in Headers */,
+				D915E1101D5A5D93003456CB /* HTMLparser.h in Headers */,
+				D915E1071D5A5D93003456CB /* catalog.h in Headers */,
+				D915E12B1D5A5D93003456CB /* xmlsave.h in Headers */,
+				D915E1221D5A5D93003456CB /* xlink.h in Headers */,
+				D915E1081D5A5D93003456CB /* chvalid.h in Headers */,
+				D915E1021D5A5D8C003456CB /* LibXMLPushSAXParser.h in Headers */,
+				D915E1301D5A5D93003456CB /* xmlversion.h in Headers */,
+				D915E12E1D5A5D93003456CB /* xmlstring.h in Headers */,
+				D915E1151D5A5D93003456CB /* parser.h in Headers */,
+				D915E1201D5A5D93003456CB /* valid.h in Headers */,
+				D915E10A1D5A5D93003456CB /* dict.h in Headers */,
+				D915E1331D5A5D93003456CB /* xpathInternals.h in Headers */,
+				D915E11B1D5A5D93003456CB /* schemasInternals.h in Headers */,
+				D915E1161D5A5D93003456CB /* parserInternals.h in Headers */,
+				D915E1171D5A5D93003456CB /* pattern.h in Headers */,
+				D915E10B1D5A5D93003456CB /* DOCBparser.h in Headers */,
+				D915E1231D5A5D93003456CB /* xmlautomata.h in Headers */,
+				D915E1141D5A5D93003456CB /* nanohttp.h in Headers */,
+				D915E1241D5A5D93003456CB /* xmlerror.h in Headers */,
+				D915E1091D5A5D93003456CB /* debugXML.h in Headers */,
+				D915E1341D5A5D93003456CB /* xpointer.h in Headers */,
+				D915E1281D5A5D93003456CB /* xmlmodule.h in Headers */,
+				D915E10C1D5A5D93003456CB /* encoding.h in Headers */,
+				D915E11C1D5A5D93003456CB /* schematron.h in Headers */,
+				D915E1111D5A5D93003456CB /* HTMLtree.h in Headers */,
+				D915E12C1D5A5D93003456CB /* xmlschemas.h in Headers */,
+				D915E12F1D5A5D93003456CB /* xmlunicode.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		C644A6361D58F74A00F26F7E /* XMLPushParser */ = {
+		C644A6361D58F74A00F26F7E /* XMLPushParser (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C644A63F1D58F74A00F26F7E /* Build configuration list for PBXNativeTarget "XMLPushParser" */;
+			buildConfigurationList = C644A63F1D58F74A00F26F7E /* Build configuration list for PBXNativeTarget "XMLPushParser (iOS)" */;
 			buildPhases = (
 				C644A6321D58F74A00F26F7E /* Sources */,
 				C644A6331D58F74A00F26F7E /* Frameworks */,
@@ -369,14 +517,14 @@
 			);
 			dependencies = (
 			);
-			name = XMLPushParser;
+			name = "XMLPushParser (iOS)";
 			productName = XMLPushParser;
 			productReference = C644A6371D58F74A00F26F7E /* XMLPushParser.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		C644A74F1D59003700F26F7E /* XMLPushParserTests */ = {
+		C644A74F1D59003700F26F7E /* XMLPushParserTests (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C644A7581D59003700F26F7E /* Build configuration list for PBXNativeTarget "XMLPushParserTests" */;
+			buildConfigurationList = C644A7581D59003700F26F7E /* Build configuration list for PBXNativeTarget "XMLPushParserTests (iOS)" */;
 			buildPhases = (
 				C644A74C1D59003700F26F7E /* Sources */,
 				C644A74D1D59003700F26F7E /* Frameworks */,
@@ -387,9 +535,45 @@
 			dependencies = (
 				C644A7571D59003700F26F7E /* PBXTargetDependency */,
 			);
-			name = XMLPushParserTests;
+			name = "XMLPushParserTests (iOS)";
 			productName = XMLPushParserTests;
-			productReference = C644A7501D59003700F26F7E /* XMLPushParserTests.xctest */;
+			productReference = C644A7501D59003700F26F7E /* XMLPushParserTests (iOS).xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D915E0E51D5A5C98003456CB /* XMLPushParser (tvOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D915E0F71D5A5C98003456CB /* Build configuration list for PBXNativeTarget "XMLPushParser (tvOS)" */;
+			buildPhases = (
+				D915E0E11D5A5C98003456CB /* Sources */,
+				D915E0E21D5A5C98003456CB /* Frameworks */,
+				D915E0E31D5A5C98003456CB /* Headers */,
+				D915E0E41D5A5C98003456CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "XMLPushParser (tvOS)";
+			productName = XMLPushParser;
+			productReference = D915E0E61D5A5C98003456CB /* XMLPushParser.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D915E0ED1D5A5C98003456CB /* XMLPushParserTests (tvOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D915E0FA1D5A5C98003456CB /* Build configuration list for PBXNativeTarget "XMLPushParserTests (tvOS)" */;
+			buildPhases = (
+				D915E0EA1D5A5C98003456CB /* Sources */,
+				D915E0EB1D5A5C98003456CB /* Frameworks */,
+				D915E0EC1D5A5C98003456CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D915E0F11D5A5C98003456CB /* PBXTargetDependency */,
+			);
+			name = "XMLPushParserTests (tvOS)";
+			productName = XMLPushParserTests;
+			productReference = D915E0EE1D5A5C98003456CB /* XMLPushParserTests (tvOS).xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -398,7 +582,7 @@
 		C644A62E1D58F74A00F26F7E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = WillowTree;
 				TargetAttributes = {
@@ -409,6 +593,16 @@
 					C644A74F1D59003700F26F7E = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
+					};
+					D915E0E51D5A5C98003456CB = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 7UMFPW78PV;
+						ProvisioningStyle = Automatic;
+					};
+					D915E0ED1D5A5C98003456CB = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 7UMFPW78PV;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -424,8 +618,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C644A6361D58F74A00F26F7E /* XMLPushParser */,
-				C644A74F1D59003700F26F7E /* XMLPushParserTests */,
+				C644A6361D58F74A00F26F7E /* XMLPushParser (iOS) */,
+				C644A74F1D59003700F26F7E /* XMLPushParserTests (iOS) */,
+				D915E0E51D5A5C98003456CB /* XMLPushParser (tvOS) */,
+				D915E0ED1D5A5C98003456CB /* XMLPushParserTests (tvOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -445,6 +641,23 @@
 				C644A7841D59074400F26F7E /* books.xml in Resources */,
 				C644A7851D59074400F26F7E /* broken-books.xml in Resources */,
 				C644A7871D59074400F26F7E /* repeat-owner.xml in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D915E0E41D5A5C98003456CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D915E0EC1D5A5C98003456CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D915E1391D5A5DE4003456CB /* books.xml in Resources */,
+				D915E13A1D5A5DE4003456CB /* broken-books.xml in Resources */,
+				D915E13B1D5A5DE4003456CB /* repeat-owner.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,13 +687,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D915E0E11D5A5C98003456CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D915E1051D5A5D8C003456CB /* XMLPushParser.swift in Sources */,
+				D915E1361D5A5DCB003456CB /* Conversion.swift in Sources */,
+				D915E1041D5A5D8C003456CB /* LibXMLPushSAXParser.swift in Sources */,
+				D915E1011D5A5D8C003456CB /* LibXMLCallbackFunctions.swift in Sources */,
+				D915E1031D5A5D8C003456CB /* LibXMLPushSAXParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D915E0EA1D5A5C98003456CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D915E1001D5A5D88003456CB /* XMLPushParserTests.swift in Sources */,
+				D915E0FD1D5A5D88003456CB /* XMLConversions.swift in Sources */,
+				D915E0FF1D5A5D88003456CB /* XMLElementParserTests.swift in Sources */,
+				D915E0FE1D5A5D88003456CB /* FileHelpers.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		C644A7571D59003700F26F7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C644A6361D58F74A00F26F7E /* XMLPushParser */;
+			target = C644A6361D58F74A00F26F7E /* XMLPushParser (iOS) */;
 			targetProxy = C644A7561D59003700F26F7E /* PBXContainerItemProxy */;
+		};
+		D915E0F11D5A5C98003456CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D915E0E51D5A5C98003456CB /* XMLPushParser (tvOS) */;
+			targetProxy = D915E0F01D5A5C98003456CB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -592,7 +833,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Willowtree.XMLPushParser;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = XMLPushParser;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -611,7 +852,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Willowtree.XMLPushParser;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = XMLPushParser;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
@@ -641,6 +882,90 @@
 			};
 			name = Release;
 		};
+		D915E0F81D5A5C98003456CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7UMFPW78PV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = XMLPushParser/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hbonordic.XMLPushParser;
+				PRODUCT_NAME = XMLPushParser;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		D915E0F91D5A5C98003456CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 7UMFPW78PV;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = XMLPushParser/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hbonordic.XMLPushParser;
+				PRODUCT_NAME = XMLPushParser;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		D915E0FB1D5A5C98003456CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = 7UMFPW78PV;
+				INFOPLIST_FILE = XMLPushParserTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hbonordic.XMLPushParserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		D915E0FC1D5A5C98003456CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = 7UMFPW78PV;
+				INFOPLIST_FILE = XMLPushParserTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hbonordic.XMLPushParserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TVOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -653,7 +978,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C644A63F1D58F74A00F26F7E /* Build configuration list for PBXNativeTarget "XMLPushParser" */ = {
+		C644A63F1D58F74A00F26F7E /* Build configuration list for PBXNativeTarget "XMLPushParser (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C644A6401D58F74A00F26F7E /* Debug */,
@@ -662,7 +987,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C644A7581D59003700F26F7E /* Build configuration list for PBXNativeTarget "XMLPushParserTests" */ = {
+		C644A7581D59003700F26F7E /* Build configuration list for PBXNativeTarget "XMLPushParserTests (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C644A7591D59003700F26F7E /* Debug */,
@@ -670,6 +995,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		D915E0F71D5A5C98003456CB /* Build configuration list for PBXNativeTarget "XMLPushParser (tvOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D915E0F81D5A5C98003456CB /* Debug */,
+				D915E0F91D5A5C98003456CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D915E0FA1D5A5C98003456CB /* Build configuration list for PBXNativeTarget "XMLPushParserTests (tvOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D915E0FB1D5A5C98003456CB /* Debug */,
+				D915E0FC1D5A5C98003456CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
