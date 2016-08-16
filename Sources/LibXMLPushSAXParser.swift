@@ -38,7 +38,7 @@ public func ==(lhs: LibXMLAttribute, rhs: LibXMLAttribute) -> Bool {
 /// Calling code must call either: 
 /// - `_parse` exactly once, or
 /// - `_parseData` any number of times and then `_finishParsing` exactly once.
-public class LibXMLPushSAXParser {
+open class LibXMLPushSAXParser {
     private lazy var __once: () = {
             if self.context != nil {
                 xmlFreeParserCtxt(self.context)
@@ -87,9 +87,9 @@ public class LibXMLPushSAXParser {
         }
     }
     
-    func startElementWithPrefix(_ prefix: String?, uri: String?, localName: String, attributes: [String:LibXMLAttribute]) -> Void { fatalError("Subclass must implement") }
-    func endElementWithPrefix(_ prefix: String?, uri: String?, localName: String) { fatalError("Subclass must implement") }
-    func charactersFound(_ characters: UnsafePointer<xmlChar>, length: Int) { fatalError("Subclass must implement") }
+    open func startElementWithPrefix(_ prefix: String?, uri: String?, localName: String, attributes: [String:LibXMLAttribute]) -> Void { fatalError("Subclass must implement") }
+    open func endElementWithPrefix(_ prefix: String?, uri: String?, localName: String) { fatalError("Subclass must implement") }
+    open func charactersFound(_ characters: UnsafePointer<xmlChar>, length: Int) { fatalError("Subclass must implement") }
     
     // The following method is dynamic because it gets called from an Objective-C function.
     dynamic func errorOccurred(_ message: String) {

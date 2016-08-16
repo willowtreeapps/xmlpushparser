@@ -148,7 +148,7 @@ public protocol ChildXMLElement: XMLElement {
     func type() -> SAXParsable.Type
 }
 
-public class XMLSAXElementParser<DataElement:XMLElement, ChildElement:ChildXMLElement>: SAXParsable {
+open class XMLSAXElementParser<DataElement:XMLElement, ChildElement:ChildXMLElement>: SAXParsable {
     required public init() {}
     
     public var data = [DataElement:[XMLDataElement]]()
