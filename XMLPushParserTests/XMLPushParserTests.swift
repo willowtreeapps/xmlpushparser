@@ -105,7 +105,7 @@ class XMLPushParserTests: XCTestCase {
     func testCatalogParse() {
         let parser = XMLPushParser<Document>()
         do {
-            let expected = [
+            let expected: [[String]] = [
                 ["bk101", "Gambardella, Matthew", "XML Developer's Guide"],
                 ["bk102", "Ralls, Kim", "Midnight Rain"],
                 ["bk103", "Corets, Eva", "Maeve Ascendant"],
@@ -123,7 +123,7 @@ class XMLPushParserTests: XCTestCase {
                 XCTFail("should have a catalog")
                 return
             }
-            XCTAssertEqual(expected, catalog.flatCatalog())
+            XCTAssert(expected.elementsEqual(catalog.flatCatalog(), by: { $0 == $1 }))
         } catch {
             XCTFail("should not throw \(error)")
         }

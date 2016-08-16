@@ -103,7 +103,7 @@ public class XMLPushParser<T: SAXParsable>: LibXMLPushSAXParser {
         dataAttributes = nil
     }
     
-    override public func charactersFound(_ characters: UnsafePointer<Int8>, length: Int) {
+    override public func charactersFound(_ characters: UnsafePointer<xmlChar>, length: Int) {
         buffer?.append(characters, length: length)
     }
 }

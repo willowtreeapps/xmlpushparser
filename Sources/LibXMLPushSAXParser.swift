@@ -67,8 +67,10 @@ public class LibXMLPushSAXParser {
     
     internal func _parseData(_ data: Data) throws -> Void {
         guard self.context != nil else { throw PushSaxParserErrorCode.usedAfterFinished }
-       
-        xmlParseChunk(self.context, UnsafePointer<CChar>((data as NSData).bytes), Int32(data.count), 0)
+
+        _ = data.withUnsafeBytes { (body: UnsafePointer<Int8>) in
+            xmlParseChunk(self.context, body, Int32(data.count), 0)
+        }
         if let error = self.error {
             throw error
         }
@@ -87,7 +89,7 @@ public class LibXMLPushSAXParser {
     
     func startElementWithPrefix(_ prefix: String?, uri: String?, localName: String, attributes: [String:LibXMLAttribute]) -> Void { fatalError("Subclass must implement") }
     func endElementWithPrefix(_ prefix: String?, uri: String?, localName: String) { fatalError("Subclass must implement") }
-    func charactersFound(_ characters: UnsafePointer<Int8>, length: Int) { fatalError("Subclass must implement") }
+    func charactersFound(_ characters: UnsafePointer<xmlChar>, length: Int) { fatalError("Subclass must implement") }
     
     // The following method is dynamic because it gets called from an Objective-C function.
     dynamic func errorOccurred(_ message: String) {

@@ -17,7 +17,7 @@ extension LibXMLRawAttribute: Equatable {
     
     var localNameString: String {
         guard let localName = localName else { return "" }
-        return String(cString: localName) ?? ""
+        return String(cString: localName)
     }
     
     var prefixString: String? {
@@ -42,8 +42,8 @@ extension LibXMLRawAttribute: Equatable {
         return (NSString(bytes: valueStart, length: valueLength, encoding: String.Encoding.utf8.rawValue) as String?) ?? ""
     }
     
-    static func getBufferPointerWithStart(_ start: UnsafePointer<Void>?, length: Int) -> UnsafeBufferPointer<LibXMLRawAttribute> {
-       return UnsafeBufferPointer<LibXMLRawAttribute>(start: UnsafePointer<LibXMLRawAttribute>(start), count: length)
+    static func getBufferPointerWithStart(_ start: UnsafeRawPointer?, length: Int) -> UnsafeBufferPointer<LibXMLRawAttribute> {
+       return UnsafeBufferPointer<LibXMLRawAttribute>(start: start?.assumingMemoryBound(to: LibXMLRawAttribute.self), count: length)
     }
 }
 
@@ -64,7 +64,7 @@ private extension LibXMLAttribute {
     }
 }
 
-private func XMLPushSAXParserStartElementSAX(_ ctx: UnsafeMutablePointer<Void>?,
+private func XMLPushSAXParserStartElementSAX(_ ctx: UnsafeMutableRawPointer?,
                                              _ localname: UnsafePointer<xmlChar>?,
                                              _ prefix: UnsafePointer<xmlChar>?,
                                              _ uri: UnsafePointer<xmlChar>?,
@@ -96,7 +96,7 @@ private func XMLPushSAXParserStartElementSAX(_ ctx: UnsafeMutablePointer<Void>?,
         attributes: elementAttributes)
 }
 
-private func XMLPushSAXParserEndElementSAX(_ ctx: UnsafeMutablePointer<Void>?,
+private func XMLPushSAXParserEndElementSAX(_ ctx: UnsafeMutableRawPointer?,
                                            _ localname: UnsafePointer<xmlChar>?,
                                            _ prefix: UnsafePointer<xmlChar>?,
                                            _ uri: UnsafePointer<xmlChar>?)
@@ -107,7 +107,7 @@ private func XMLPushSAXParserEndElementSAX(_ ctx: UnsafeMutablePointer<Void>?,
         localName: getString(localname) ?? "")
 }
 
-private func XMLPushSAXParserCharactersFoundSAX(_ ctx: UnsafeMutablePointer<Void>?,
+private func XMLPushSAXParserCharactersFoundSAX(_ ctx: UnsafeMutableRawPointer?,
                                                 _ ch: UnsafePointer<xmlChar>?,
                                                 _ len: Int32)
 {
@@ -116,7 +116,8 @@ private func XMLPushSAXParserCharactersFoundSAX(_ ctx: UnsafeMutablePointer<Void
         parser.errorOccurred("reported nil characters found")
         return
     }
-    parser.charactersFound(UnsafePointer<Int8>(ch), length: Int(len))
+    
+    parser.charactersFound(ch, length: Int(len))
 }
 
 // Swift global variables are guaranteed to be lazy initialized in a thread-safe manner!
@@ -130,18 +131,17 @@ internal var XMLPushSAXParserHandlerStruct = { () -> xmlSAXHandler in
     return handler
 }()
 
-private func getParser(_ ctx: UnsafeMutablePointer<Void>?) -> LibXMLPushSAXParser {
-    guard let ctx = ctx else {
+private func getParser(_ ctx: UnsafeMutableRawPointer?) -> LibXMLPushSAXParser {
+    guard let ctx = ctx?.assumingMemoryBound(to: LibXMLPushSAXParser.self) else {
         preconditionFailure("ctx ptr must be set")
     }
 
-    return UnsafeMutablePointer<LibXMLPushSAXParser>(ctx).pointee
+    return ctx.pointee
 }
 
 private func getString(_ pointer: UnsafePointer<xmlChar>?) -> String? {
     guard let pointer = pointer else {
         return nil
     }
-    let charPointer = UnsafePointer<CChar>(pointer)
-    return String(cString: charPointer)
+    return pointer.withMemoryRebound(to: CChar.self, capacity: 0) { String(cString: $0) }
 }

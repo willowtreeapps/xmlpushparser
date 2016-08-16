@@ -123,7 +123,7 @@ class XMLPushParserElementParserTests: XCTestCase {
                 ["O'Brien, Tim", "MSXML3: A Comprehensive Guide"],
                 ["Galos, Mike", "Visual Studio 7: A Comprehensive Guide"],
             ]
-            XCTAssertEqual(expected, catalog.flatCatalog())
+            XCTAssert(expected.elementsEqual(catalog.flatCatalog(), by: { $0 == $1 }))
         } catch {
             XCTFail("should not throw, got: \(error)")
         }
