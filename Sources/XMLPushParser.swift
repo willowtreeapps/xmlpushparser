@@ -205,9 +205,9 @@ public struct XMLDataElement: Equatable {
     }
     
     public var boolValue: Bool? {
-        if value == "True" {
+        if value.lowercased() == "true" {
             return true
-        } else if value == "False" {
+        } else if value.lowercased() == "false" {
             return false
         } else {
             return nil
