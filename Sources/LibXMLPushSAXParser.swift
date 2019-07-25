@@ -92,7 +92,7 @@ open class LibXMLPushSAXParser {
     open func charactersFound(_ characters: UnsafePointer<xmlChar>, length: Int) { fatalError("Subclass must implement") }
     
     // The following method is dynamic because it gets called from an Objective-C function.
-    dynamic func errorOccurred(_ message: String) {
+    @objc dynamic func errorOccurred(_ message: String) {
         self.error = PushSaxParserErrorCode.libXML2Error(message: message)
     }
 
